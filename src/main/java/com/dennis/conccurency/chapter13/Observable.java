@@ -1,4 +1,4 @@
-package com.dennis.conccurency.chapter12;
+package com.dennis.conccurency.chapter13;
 
 /**
  * 描述：观察者模式

@@ -1,7 +1,5 @@
 package com.dennis.conccurency.chapter15;
 
-import java.util.concurrent.locks.ReadWriteLock;
-
 /**
  * 描述：读写锁工厂顶层接口
  *
@@ -9,16 +7,16 @@ import java.util.concurrent.locks.ReadWriteLock;
  * @version 1.0
  * @date 2020/3/18 11:12
  */
-public interface ReadWriteLockFactory {
+public interface ReadWriteLock {
     /**
      * 创建读锁
      */
-    void readLock();
+    ReadLock readLock();
 
     /**
      * 创建写锁
      */
-    void writeLock();
+    WriteLock writeLock();
 
     /**
      * 获取当前有多少线程正在执行写操作
@@ -38,5 +36,14 @@ public interface ReadWriteLockFactory {
     /**
      * 工厂方法创建读写锁
      */
-    static ReadWriteLoc
+    static ReadWriteLock getReadWriteLockImpl() {
+        return new ReadWriteLockImpl();
+    }
+
+    /**
+     * 工厂方法创建读写锁,并传入preferWriter
+     */
+    static ReadWriteLock getReadWriteLockImpl(boolean preferWriter) {
+        return new ReadWriteLockImpl(preferWriter);
+    }
 }
