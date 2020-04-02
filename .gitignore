@@ -1,6 +1,7 @@
 # Idea
 *.iml
 *.idea
+.settings
 .idea/**
 .idea/
 
