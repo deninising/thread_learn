@@ -19,13 +19,20 @@ public class AtomicStampedReferenceTest {
         studentNode01.setNext(null);
         AtomicStampedReference<Node<Student>> atomicStudentNode = new AtomicStampedReference<>(studentNode01, 1);
 
-        // 可以用AtomicReference<T>来包装匿名内部类将要访问并进行修改的对象T,不用数组进行包装
-        AtomicReference<String> a = new AtomicReference<>("abc");
-//        a = "abc";
-        new Thread(() -> {
-            a.set("sdf");
-        // 可以用AtomicReference<T>来包装匿名内部类将要访问并进行修改的对象T,不用数组进行包装：
+        // 可以用AtomicReference<T>来包装匿名内部类将要进行修改的对象T,不用数组进行包装
 
+        /*局部内部类和匿名内部类只能访问局部final变量"
+        从JDK 1.8开始，会默认给这两种内部类访问(读操作)的field 加上final(隐式地)，
+        所以你可能会在编译器中看到可以访问没有加final的变量，只有你去修改(写操作)它时，
+        编译器才会报错。总结：内部类访问外部类的变量本质上是对外部变量的一份拷贝的访问操
+        作,从而会引发数据不一致问题,因此需要对外部变量进行final修饰*/
+
+        AtomicReference<String> a = new AtomicReference<>("abc");
+//        String a = "abc";
+        new Thread(() -> {
+            a.set("dfd");
+//            a = "dfd";
+        // 可以用AtomicReference<T>来包装匿名内部类将要访问并进行修改的对象T,不用数组进行包装：
             int stamp = atomicStudentNode.getStamp();
             try {
                 TimeUnit.SECONDS.sleep(3);
