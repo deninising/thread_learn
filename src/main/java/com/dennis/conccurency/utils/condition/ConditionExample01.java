@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 描述：采用condition实现生产者-消费者模式--->与com.dennis.conccurency.chapter07中的生产者消费模式（object.wait 和 synchronized()）对比
+ * 描述：采用condition实现生产者-消费者模式--->与com.dennis.conccurency.chapter07中的生产者消费模式（Object.wait, Object.notify和 synchronized()）对比
  *
  * @author Dennis
  * @version 1.0
@@ -58,13 +58,13 @@ public class ConditionExample01 {
 
             LOCK.lock(); // monitor enter
             while (consumed) { // monitor await
-                CONDITION.await();
+                CONDITION.await(); // object.await()
             }
 
             TimeUnit.SECONDS.sleep(1);
             System.out.println(Thread.currentThread().getName() + " has already consume the data：" + sharedData);
             consumed = true;
-            CONDITION.signalAll();
+            CONDITION.signalAll(); // object.notifyAll()
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

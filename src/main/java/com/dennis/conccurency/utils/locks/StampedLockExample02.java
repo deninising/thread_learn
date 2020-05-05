@@ -37,6 +37,11 @@ public class StampedLockExample02 {
     }
 
     // 乐观读
+    /**
+     * 使用乐观读锁访问共享资源
+     * 注意：乐观读锁在保证数据一致性上需要拷贝一份要操作的变量到方法栈，并且在操作数据时候可能其他写线程已经修改了数据，
+     * 而我们操作的是方法栈里面的数据，也就是一个快照，所以最多返回的不是最新的数据，但是一致性还是得到保障的。
+     */
     private void read() {
         long stamp = LOCK.tryOptimisticRead();  // 非阻塞获取版本信息
         List<Long> currentData = SHARED_DATA;   // 拷贝变量到线程本地堆栈
@@ -87,5 +92,6 @@ public class StampedLockExample02 {
         pool.submit(readTask);
         pool.submit(readTask);
         pool.submit(writeTask);
+
     }
 }

@@ -88,14 +88,5 @@ public class ReadWriteLockExample01 {
         executorService.submit(readTask);
         // ?? 写线程较读线程貌似更容易获取到cpu的执行权
         executorService.submit(writeTask);
-//        executorService.submit(writeTask);
-//        executorService.submit(writeTask);
-//        executorService.submit(writeTask);
-//        executorService.submit(writeTask);
-//        executorService.submit(writeTask);
-//        executorService.submit(writeTask);
-//        executorService.submit(writeTask);
-//        executorService.submit(writeTask);
-//        executorService.submit(writeTask);
     }
 }

@@ -1,7 +1,5 @@
 package com.dennis.conccurency.utils.locks;
 
-import jdk.nashorn.internal.runtime.Timing;
-
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
